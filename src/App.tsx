@@ -26,7 +26,7 @@ function App() {
     <div className="main">
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="">Booknest</Navbar.Brand>
+          <Navbar.Brand href="/">Booknest</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="list">Book list</Nav.Link>
             <Nav.Link href="browse">Browse</Nav.Link>
