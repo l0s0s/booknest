@@ -3,11 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
 
 const Browse = () => {
     return (
         <Container>
+            <br />
+            <h3 className="text-center">Top 100 books of all time: </h3>
             <Row>
                 {books.map((book, index) => (
                     <Col key={index} md={2}>
@@ -23,6 +26,9 @@ const Browse = () => {
                     </Col>
                 ))}
             </Row>
+            <br />
+            <h3 className="text-center">{"More books should be later:)"}</h3>
+            <br />
         </Container>
     );
 };
