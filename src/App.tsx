@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./components/Home"
 import BookList from "./components/BookList"
 import Browse from "./components/Browse"
-
+import NoMatch from "./components/NoMatch"
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -48,6 +48,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="list" element={<BookList />} />
         <Route path="browse" element={<Browse />} />
+        <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
 
