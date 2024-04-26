@@ -9,6 +9,7 @@ import Home from "./components/Home"
 import BookList from "./components/BookList"
 import Browse from "./components/Browse"
 import NoMatch from "./components/NoMatch"
+import { initializeApp } from 'firebase/app';
 
 function App() {
   const [inputText, setInputText] = useState("");
