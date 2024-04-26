@@ -13,6 +13,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import AddBook from './pages/AddBook';
 import AddAuthor from './pages/AddAuthor';
 import AddGenre from './pages/AddGenre';
+import BookDetails from './pages/Book';
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -60,6 +61,7 @@ function App() {
         <Route path="add/book" element={<AddBook />} />
         <Route path="add/author" element={<AddAuthor />} />
         <Route path="add/genre" element={<AddGenre />} />
+        <Route path="book/:id" element={<BookDetails />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>

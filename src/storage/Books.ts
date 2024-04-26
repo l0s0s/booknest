@@ -1,18 +1,32 @@
 import Book from '../model/Book';
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, doc } from "firebase/firestore";
 import { db } from "./Firebase";
 
-const addBook = async (book: Book): Promise<void> => {
+const collectionName = "books";
+
+export const addBook = async (book: Book): Promise<void> => {
     try {
-        await addDoc(collection(db, "books"), book);
+        await addDoc(collection(db, collectionName), book);
     } catch (e) {
         console.error("Error adding document: ", e);
     } 
 }
 
-const getBooks = async (): Promise<Book[]> => {
+export const getBook = async (id: string): Promise<Book | null> => {
     try {
-        const querySnapshot = await getDocs(collection(db, "books"));
+        const docRef = doc(db, collectionName, id);
+        const docSnap = await getDoc(docRef);
+
+        return docSnap.exists() ? docSnap.data() as Book : null;
+    } catch (e) {
+        console.error("Error getting document:", e);
+        return null;
+    }
+}
+
+export const getBooks = async (): Promise<Book[]> => {
+    try {
+        const querySnapshot = await getDocs(collection(db, collectionName));
         let books: Book[] = [];
         querySnapshot.forEach((doc) => {
             books.push(doc.data() as Book);
@@ -23,5 +37,3 @@ const getBooks = async (): Promise<Book[]> => {
         return [];
     }
 }
-
-export default addBook;

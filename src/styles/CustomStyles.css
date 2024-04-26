@@ -1,4 +1,8 @@
 input.custom-focus:focus {
     border-color: grey;
     box-shadow: 0 0 3px grey;
+}
+
+.genre {
+    margin-right: 3px;
   }

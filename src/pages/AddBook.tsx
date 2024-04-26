@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import addBook from '../storage/Books'; 
+import { addBook } from '../storage/Books'; 
 import uploadCover from '../storage/Cover'; 
 import Alert from 'react-bootstrap/Alert';
 import '../styles/CustomStyles.css';
