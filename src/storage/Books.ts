@@ -17,7 +17,15 @@ export const getBook = async (id: string): Promise<Book | null> => {
         const docRef = doc(db, collectionName, id);
         const docSnap = await getDoc(docRef);
 
-        return docSnap.exists() ? docSnap.data() as Book : null;
+        if (!docSnap.exists()) {
+            console.log("No such document!");
+            return null;
+        }
+        
+        var b = docSnap.data() as Book
+        b.Metadata = { ID: docSnap.id };
+
+        return b;
     } catch (e) {
         console.error("Error getting document:", e);
         return null;
@@ -29,7 +37,10 @@ export const getBooks = async (): Promise<Book[]> => {
         const querySnapshot = await getDocs(query(collection(db, collectionName), orderBy("Rating", "desc")));
         let books: Book[] = [];
         querySnapshot.forEach((doc) => {
-            books.push(doc.data() as Book);
+            var b = doc.data() as Book;
+            b.Metadata = { ID: doc.id };
+
+            books.push(b);
         });
         return books;
     } catch (e) {

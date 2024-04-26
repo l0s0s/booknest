@@ -6,6 +6,10 @@ import Book from '../model/Book';
 
 
 const Grid = (elements: Book[]) => {
+    const handleCardClick = (element: Book) => {
+        window.location.href = `/book/${element.Metadata?.ID ?? ""}`;
+    };
+
     return (
         <Container>
             <br />
@@ -13,7 +17,7 @@ const Grid = (elements: Book[]) => {
                 {elements.map((element, index) => (
                     <Col key={index} md={2}>
                         <br />
-                        <Card className="d-flex flex-column" style={{ cursor: 'pointer' }}>
+                        <Card className="d-flex flex-column" style={{ cursor: 'pointer' }} onClick={() => handleCardClick(element)}>
                             <span title={element.Title}>
                                 <Card.Img className="img-fluid" variant="top" src={element.CoverURL} style={{ aspectRatio: '469/727' }} />
                                 <Card.Body className="flex-grow-1">
