@@ -12,7 +12,6 @@ import NoMatch from "./pages/NoMatch"
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import AddBook from './pages/AddBook';
 import AddAuthor from './pages/AddAuthor';
-import AddGenre from './pages/AddGenre';
 import BookDetails from './pages/Book';
 
 function App() {
@@ -38,7 +37,6 @@ function App() {
             <NavDropdown title="Add data" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="/add/book">Add book</NavDropdown.Item>
               <NavDropdown.Item href="/add/author">Add author</NavDropdown.Item>
-              <NavDropdown.Item href="/add/genre">Add genre</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Form className="d-flex" onSubmit={inputHandler}>
@@ -61,7 +59,6 @@ function App() {
         <Route path="browse" element={<Browse />} />
         <Route path="add/book" element={<AddBook />} />
         <Route path="add/author" element={<AddAuthor />} />
-        <Route path="add/genre" element={<AddGenre />} />
         <Route path="book/:id" element={<BookDetails />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
