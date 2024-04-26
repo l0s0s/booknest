@@ -1,13 +1,10 @@
 import Book from '../model/Book';
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "./Firebase";
-import { uid } from 'react-uid';
 
 const addBook = async (book: Book): Promise<void> => {
     try {
-        book.ID = uid(book);
-
-        await addDoc(collection(db, "todos"), book);
+        await addDoc(collection(db, "books"), book);
     } catch (e) {
         console.error("Error adding document: ", e);
     } 
@@ -15,7 +12,7 @@ const addBook = async (book: Book): Promise<void> => {
 
 const getBooks = async (): Promise<Book[]> => {
     try {
-        const querySnapshot = await getDocs(collection(db, "todos"));
+        const querySnapshot = await getDocs(collection(db, "books"));
         let books: Book[] = [];
         querySnapshot.forEach((doc) => {
             books.push(doc.data() as Book);
@@ -26,3 +23,5 @@ const getBooks = async (): Promise<Book[]> => {
         return [];
     }
 }
+
+export default addBook;

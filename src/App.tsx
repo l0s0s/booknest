@@ -9,7 +9,10 @@ import Home from "./pages/Home"
 import BookList from "./pages/BookList"
 import Browse from "./pages/Browse"
 import NoMatch from "./pages/NoMatch"
-import { initializeApp } from 'firebase/app';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import AddBook from './pages/AddBook';
+import AddAuthor from './pages/AddAuthor';
+import AddGenre from './pages/AddGenre';
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -29,8 +32,13 @@ function App() {
         <Container>
           <Navbar.Brand href="/">Booknest</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="list">Book list</Nav.Link>
-            <Nav.Link href="browse">Browse</Nav.Link>
+            <Nav.Link href="/list">Book list</Nav.Link>
+            <Nav.Link href="/browse">Browse</Nav.Link>
+            <NavDropdown title="Add data" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="/add/book">Add book</NavDropdown.Item>
+              <NavDropdown.Item href="/add/author">Add author</NavDropdown.Item>
+              <NavDropdown.Item href="/add/genre">Add genre</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
           <Form className="d-flex">
             <Form.Control
@@ -49,6 +57,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="list" element={<BookList />} />
         <Route path="browse" element={<Browse />} />
+        <Route path="add/book" element={<AddBook />} />
+        <Route path="add/author" element={<AddAuthor />} />
+        <Route path="add/genre" element={<AddGenre />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>

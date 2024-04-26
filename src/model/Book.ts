@@ -1,5 +1,4 @@
 type Book = {
-    ID: string,
     Title : string,
     AuthorID : string,
     Genres : string[],
