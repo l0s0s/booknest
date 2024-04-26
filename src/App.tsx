@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home"
 import BookList from "./pages/BookList"
@@ -16,15 +16,15 @@ import AddGenre from './pages/AddGenre';
 import BookDetails from './pages/Book';
 
 function App() {
-  const [inputText, setInputText] = useState("");
+  const [search, setSearch] = useState('');
 
-  let inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    var lowerCase = e.target.value.toLowerCase();
+  let inputHandler = (e: FormEvent) => {
+    e.preventDefault();
 
-    console.log(lowerCase);
+    var lowerCase = search.toLowerCase();
+    lowerCase.split(' ').join('+');
 
-    const timeOutId = setTimeout(() => setInputText(lowerCase.split(' ').join('+')), 500);
-    return () => clearTimeout(timeOutId);
+    window.location.href = `/browse?search=${lowerCase}`;
   };
 
   return (  
@@ -41,13 +41,14 @@ function App() {
               <NavDropdown.Item href="/add/genre">Add genre</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={inputHandler}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
-              onChange={inputHandler}
+              value={search}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
             />
           </Form>
         </Container>
