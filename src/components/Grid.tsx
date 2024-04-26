@@ -2,8 +2,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Book from '../model/Book';
 
-const Grid = (elements: any[]) => {
+
+const Grid = (elements: Book[]) => {
     return (
         <Container>
             <br />
@@ -12,10 +14,10 @@ const Grid = (elements: any[]) => {
                     <Col key={index} md={2}>
                         <br />
                         <Card className="d-flex flex-column" style={{ cursor: 'pointer' }}>
-                            <span title={element.title}>
-                                <Card.Img className="img-fluid" variant="top" src={element.image} style={{ aspectRatio: '469/727' }} />
+                            <span title={element.Title}>
+                                <Card.Img className="img-fluid" variant="top" src={element.CoverURL} style={{ aspectRatio: '469/727' }} />
                                 <Card.Body className="flex-grow-1">
-                                    <Card.Title className="text-truncate" style={{ fontSize: "15px" }}>{element.title}</Card.Title>
+                                    <Card.Title className="text-truncate" style={{ fontSize: "15px" }}>{element.Title}</Card.Title>
                                 </Card.Body>
                             </span>
                         </Card>

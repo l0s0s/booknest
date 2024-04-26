@@ -1,5 +1,5 @@
 import Book from '../model/Book';
-import { collection, addDoc, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, addDoc, query, getDoc, doc, orderBy, getDocs } from "firebase/firestore";
 import { db } from "./Firebase";
 
 const collectionName = "books";
@@ -26,7 +26,7 @@ export const getBook = async (id: string): Promise<Book | null> => {
 
 export const getBooks = async (): Promise<Book[]> => {
     try {
-        const querySnapshot = await getDocs(collection(db, collectionName));
+        const querySnapshot = await getDocs(query(collection(db, collectionName), orderBy("Rating", "desc")));
         let books: Book[] = [];
         querySnapshot.forEach((doc) => {
             books.push(doc.data() as Book);
