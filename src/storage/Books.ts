@@ -1,9 +1,12 @@
 import Book from '../model/Book';
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "./Firebase";
+import { uid } from 'react-uid';
 
 const addBook = async (book: Book): Promise<void> => {
     try {
+        book.ID = uid(book);
+
         await addDoc(collection(db, "todos"), book);
     } catch (e) {
         console.error("Error adding document: ", e);

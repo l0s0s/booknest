@@ -5,10 +5,10 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import { ChangeEvent, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from "./components/Home"
-import BookList from "./components/BookList"
-import Browse from "./components/Browse"
-import NoMatch from "./components/NoMatch"
+import Home from "./pages/Home"
+import BookList from "./pages/BookList"
+import Browse from "./pages/Browse"
+import NoMatch from "./pages/NoMatch"
 import { initializeApp } from 'firebase/app';
 
 function App() {
