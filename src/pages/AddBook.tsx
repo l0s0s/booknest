@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Card from 'react-bootstrap/Card';
@@ -8,6 +8,7 @@ import { addBook } from '../storage/Books';
 import uploadCover from '../storage/Cover'; 
 import Alert from 'react-bootstrap/Alert';
 import '../styles/CustomStyles.css';
+import userEvent from '@testing-library/user-event';
 
 const AddBook = () => {
   const [title, setTitle] = useState('');
@@ -39,6 +40,12 @@ const AddBook = () => {
         setSuccess(false);
         setError('Error uploading cover');
       });
+
+    setTitle('');
+    setAuthor('');
+    setGenres('');
+    setDescription('');
+    setCover(null);
   };
 
   return (
@@ -107,6 +114,7 @@ const AddBook = () => {
                 accept="image/*"
                 placeholder="Cover"
                 aria-describedby="basic-addon1"
+                {...(cover ? {} : {value: ''})}
                 onChange={(event) => {
                   const file = (event.target as HTMLInputElement).files?.[0] ?? null;
                   setCover(file);
