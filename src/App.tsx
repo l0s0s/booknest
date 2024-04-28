@@ -13,6 +13,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import AddBook from './pages/AddBook';
 import AddAuthor from './pages/AddAuthor';
 import BookDetails from './pages/Book';
+import EditBook from './pages/EditBook';
 
 function App() {
   const [search, setSearch] = useState('');
@@ -60,14 +61,10 @@ function App() {
         <Route path="add/book" element={<AddBook />} />
         <Route path="add/author" element={<AddAuthor />} />
         <Route path="book/:id" element={<BookDetails />} />
+        <Route path="book/edit/:id" element={<EditBook />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
-
-      {/* {inputText.length > 0 ? (
-      ) : (
-        <></>
-      )} */}
     </div>
   );
 }

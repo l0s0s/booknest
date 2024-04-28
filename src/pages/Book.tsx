@@ -1,17 +1,24 @@
 import { useParams } from 'react-router-dom';
 import { getBook } from '../storage/Books';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Book from '../model/Book';
 import { Container, Row, Col, Image, Badge } from 'react-bootstrap';
 import '../styles/CustomStyles.css';
 
 const BookDetails = () => {
     const [book, setBook] = useState<Book | null>(null);
+    const [hovered, setHovered] = useState(false);
     const { id } = useParams<{ id: string }>();
 
-    getBook(id ?? "").then((book) => {
-        setBook(book);
-    });
+    useEffect(() => {
+        getBook(id ?? "").then((book) => {
+            setBook(book);
+        });
+    }, []);
+    
+    const handleClick = () => {
+        window.location.href = `/book/edit/${id}`;
+    };
 
     return (
         <Container>
@@ -21,7 +28,12 @@ const BookDetails = () => {
                 <Image src={book?.CoverURL} fluid />
             </Col>
             <Col xs={12} md={8}>
-                <h1>{book?.Title}</h1>
+                <h1 className="title" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+                    {book?.Title}
+                    {hovered && (
+                        <span role="img" onClick={handleClick} aria-label="edit" className="edit-emoji">✏️</span>
+                    )}
+                </h1>
                 <h3>by {book?.AuthorID}</h3>
                 <div>
                 <strong>Genres:</strong>{' '}

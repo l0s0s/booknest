@@ -5,4 +5,20 @@ input.custom-focus:focus {
 
 .genre {
     margin-right: 3px;
-  }
+}
+
+.title {
+    position: relative;
+}
+  
+.edit-emoji {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: -5px;
+}
+  
+.title:hover .edit-emoji {
+    display: inline-block;
+    font-size: 14px;
+}
