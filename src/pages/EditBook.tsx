@@ -10,6 +10,7 @@ import Book from '../model/Book';
 import { useParams } from 'react-router-dom';
 import { getBook, updateBook } from '../storage/Books';
 import uploadCover from "../storage/Cover";
+import { Link } from 'react-router-dom';
 
 const EditBook = () => {
   const { id } = useParams<{ id: string }>();
@@ -78,7 +79,13 @@ const EditBook = () => {
       )}
       <Card>
         <Card.Body>
+          <Link to={`/book/${id}`}>
+            <Button variant="secondary">
+              {`< Back to ${title}`}
+            </Button>
+          </Link>
           <Form onSubmit={handleSubmit}>
+            <br />
             <InputGroup className="mb-3">
               <Form.Control
                 className="custom-focus"
