@@ -1,33 +1,33 @@
-import './App.css';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from "./pages/Home"
-import BookList from "./pages/BookList"
-import Browse from "./pages/Browse"
-import NoMatch from "./pages/NoMatch"
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import AddBook from './pages/AddBook';
-import AddAuthor from './pages/AddAuthor';
-import BookDetails from './pages/Book';
-import EditBook from './pages/EditBook';
+import "./App.css";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import BookList from "./pages/BookList";
+import Browse from "./pages/Browse";
+import NoMatch from "./pages/NoMatch";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import AddBook from "./pages/AddBook";
+import AddAuthor from "./pages/AddAuthor";
+import BookDetails from "./pages/Book";
+import EditBook from "./pages/EditBook";
 
 function App() {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   let inputHandler = (e: FormEvent) => {
     e.preventDefault();
 
     var lowerCase = search.toLowerCase();
-    lowerCase.split(' ').join('+');
+    lowerCase.split(" ").join("+");
 
     window.location.href = `/browse?search=${lowerCase}`;
   };
 
-  return (  
+  return (
     <div className="main">
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
@@ -47,24 +47,26 @@ function App() {
               className="me-2"
               aria-label="Search"
               value={search}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setSearch(e.target.value)
+              }
             />
           </Form>
         </Container>
       </Navbar>
 
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="list" element={<BookList />} />
-        <Route path="browse" element={<Browse />} />
-        <Route path="add/book" element={<AddBook />} />
-        <Route path="add/author" element={<AddAuthor />} />
-        <Route path="book/:id" element={<BookDetails />} />
-        <Route path="book/edit/:id" element={<EditBook />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="list" element={<BookList />} />
+          <Route path="browse" element={<Browse />} />
+          <Route path="add/book" element={<AddBook />} />
+          <Route path="add/author" element={<AddAuthor />} />
+          <Route path="book/:id" element={<BookDetails />} />
+          <Route path="book/edit/:id" element={<EditBook />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

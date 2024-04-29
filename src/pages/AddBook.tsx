@@ -1,22 +1,22 @@
-import React, {useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import { addBook } from '../storage/Books'; 
-import uploadCover from '../storage/Cover'; 
-import Alert from 'react-bootstrap/Alert';
-import '../styles/CustomStyles.css';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import { addBook } from "../storage/Books";
+import uploadCover from "../storage/Cover";
+import Alert from "react-bootstrap/Alert";
+import "../styles/CustomStyles.css";
 
 const AddBook = () => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [genres, setGenres] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [genres, setGenres] = useState("");
+  const [description, setDescription] = useState("");
   const [cover, setCover] = useState<File | null>(null);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -26,24 +26,24 @@ const AddBook = () => {
         addBook({
           Title: title,
           AuthorID: author, //TODO: put here an author ID
-          Genres: genres.split(','),
+          Genres: genres.split(","),
           Rating: 0,
           Description: description,
-          CoverURL: url
+          CoverURL: url,
         });
         setSuccess(true);
-        setError('');
+        setError("");
       })
       .catch((error) => {
-        console.error('Error uploading cover:', error);
+        console.error("Error uploading cover:", error);
         setSuccess(false);
-        setError('Error uploading cover');
+        setError("Error uploading cover");
       });
 
-    setTitle('');
-    setAuthor('');
-    setGenres('');
-    setDescription('');
+    setTitle("");
+    setAuthor("");
+    setGenres("");
+    setDescription("");
     setCover(null);
   };
 
@@ -56,7 +56,7 @@ const AddBook = () => {
         </Alert>
       )}
       {error && (
-        <Alert variant="danger" onClose={() => setError('')} dismissible>
+        <Alert variant="danger" onClose={() => setError("")} dismissible>
           {error}
         </Alert>
       )}
@@ -113,9 +113,10 @@ const AddBook = () => {
                 accept="image/*"
                 placeholder="Cover"
                 aria-describedby="basic-addon1"
-                {...(cover ? {} : {value: ''})}
+                {...(cover ? {} : { value: "" })}
                 onChange={(event) => {
-                  const file = (event.target as HTMLInputElement).files?.[0] ?? null;
+                  const file =
+                    (event.target as HTMLInputElement).files?.[0] ?? null;
                   setCover(file);
                 }}
                 required
@@ -130,6 +131,6 @@ const AddBook = () => {
       </Card>
     </Container>
   );
-}
+};
 
 export default AddBook;

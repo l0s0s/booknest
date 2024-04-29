@@ -1,24 +1,24 @@
 input.custom-focus:focus {
-    border-color: grey;
-    box-shadow: 0 0 3px grey;
+  border-color: grey;
+  box-shadow: 0 0 3px grey;
 }
 
 .genre {
-    margin-right: 3px;
+  margin-right: 3px;
 }
 
 .title {
-    position: relative;
+  position: relative;
 }
-  
+
 .edit-emoji {
-    display: none;
-    cursor: pointer;
-    position: absolute;
-    top: -5px;
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: -5px;
 }
-  
+
 .title:hover .edit-emoji {
-    display: inline-block;
-    font-size: 14px;
+  display: inline-block;
+  font-size: 14px;
 }

@@ -1,37 +1,38 @@
-import { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
-import '../styles/CustomStyles.css';
-import Book from '../model/Book';
-import { useParams } from 'react-router-dom';
-import { getBook, updateBook } from '../storage/Books';
+import { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import "../styles/CustomStyles.css";
+import Book from "../model/Book";
+import { useParams } from "react-router-dom";
+import { getBook, updateBook } from "../storage/Books";
 import uploadCover from "../storage/Cover";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const EditBook = () => {
   const { id } = useParams<{ id: string }>();
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [genres, setGenres] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [genres, setGenres] = useState("");
+  const [description, setDescription] = useState("");
   const [cover, setCover] = useState<File | null>(null);
-  const [coverURL, setCoverURL] = useState('');
+  const [coverURL, setCoverURL] = useState("");
   const [rating, setRating] = useState(0);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    getBook(id ?? "").then((book: Book | null) => { // Update the type of the parameter to accept Book | null
-      setTitle(book?.Title ?? '');
-      setAuthor(book?.AuthorID ?? '');
-      setGenres(book?.Genres.join(',') ?? '');
-      setDescription(book?.Description ?? '');
+    getBook(id ?? "").then((book: Book | null) => {
+      // Update the type of the parameter to accept Book | null
+      setTitle(book?.Title ?? "");
+      setAuthor(book?.AuthorID ?? "");
+      setGenres(book?.Genres.join(",") ?? "");
+      setDescription(book?.Description ?? "");
       setRating(book?.Rating ?? 0);
-      setCoverURL(book?.CoverURL ?? '');
+      setCoverURL(book?.CoverURL ?? "");
     });
   }, []);
 
@@ -39,29 +40,29 @@ const EditBook = () => {
     event.preventDefault();
 
     if (cover != null) {
-      uploadCover(title, cover!)
+      uploadCover(title, cover!);
     }
 
     updateBook({
       Title: title,
       AuthorID: author,
-      Genres: genres.split(','),
+      Genres: genres.split(","),
       Description: description,
       CoverURL: coverURL,
       Rating: rating,
       Metadata: {
-        ID: id ?? ''
-      }
+        ID: id ?? "",
+      },
     })
       .then(() => {
         setSuccess(true);
-        setError('');
+        setError("");
       })
       .catch((error) => {
-        console.error('Error updating book:', error);
+        console.error("Error updating book:", error);
         setSuccess(false);
-        setError('Error updating book');
-    })
+        setError("Error updating book");
+      });
   };
 
   return (
@@ -73,16 +74,14 @@ const EditBook = () => {
         </Alert>
       )}
       {error && (
-        <Alert variant="danger" onClose={() => setError('')} dismissible>
+        <Alert variant="danger" onClose={() => setError("")} dismissible>
           {error}
         </Alert>
       )}
       <Card>
         <Card.Body>
           <Link to={`/book/${id}`}>
-            <Button variant="secondary">
-              {`< Back to ${title}`}
-            </Button>
+            <Button variant="secondary">{`< Back to ${title}`}</Button>
           </Link>
           <Form onSubmit={handleSubmit}>
             <br />
@@ -137,7 +136,8 @@ const EditBook = () => {
                 placeholder="Cover"
                 aria-describedby="basic-addon1"
                 onChange={(event) => {
-                  const file = (event.target as HTMLInputElement).files?.[0] ?? null;
+                  const file =
+                    (event.target as HTMLInputElement).files?.[0] ?? null;
                   setCover(file);
                 }}
               />
@@ -151,6 +151,6 @@ const EditBook = () => {
       </Card>
     </Container>
   );
-}
+};
 
 export default EditBook;

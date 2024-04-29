@@ -1,41 +1,34 @@
-import Grid from '../components/Grid';
-import { getBooks } from '../storage/Books';
-import { useState, useEffect } from 'react';
-import Book from '../model/Book';
-import { useSearchParams } from 'react-router-dom';
-
-
+import Grid from "../components/Grid";
+import { getBooks } from "../storage/Books";
+import { useState, useEffect } from "react";
+import Book from "../model/Book";
+import { useSearchParams } from "react-router-dom";
 
 const Browse = () => {
-    const [books, setBook] = useState<Book[]>([]);
-    const [searchParams, setSearchParams] = useSearchParams();
+  const [books, setBook] = useState<Book[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-    const filterData = (books: Book[], searchText: string) => {
-        return books.filter(item => {
-          return Object.values(item).some(value =>
-            String(value).toLowerCase().includes(searchText.toLowerCase())
-          );
-        });
-      };
+  const filterData = (books: Book[], searchText: string) => {
+    return books.filter((item) => {
+      return Object.values(item).some((value) =>
+        String(value).toLowerCase().includes(searchText.toLowerCase()),
+      );
+    });
+  };
 
+  useEffect(() => {
+    getBooks().then((books) => {
+      const search = searchParams.get("search");
 
-    useEffect(() => {
-        getBooks().then((books) => {
-            const search = searchParams.get('search');
+      if (search) {
+        books = filterData(books, search);
+      }
 
-            if (search) {
-                books = filterData(books, search);
-            }
-            
-            setBook(books);
-        });
-    }, []);
+      setBook(books);
+    });
+  }, []);
 
-    return (
-        <div className='browse'>
-            {Grid(books)}
-        </div>
-    );
+  return <div className="browse">{Grid(books)}</div>;
 };
 
 export default Browse;
