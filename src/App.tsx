@@ -21,7 +21,7 @@ function App() {
   let inputHandler = (e: FormEvent) => {
     e.preventDefault();
 
-    var lowerCase = search.toLowerCase();
+    let lowerCase = search.toLowerCase();
     lowerCase.split(" ").join("+");
 
     window.location.href = `/browse?search=${lowerCase}`;

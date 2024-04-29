@@ -31,7 +31,7 @@ export const getBook = async (id: string): Promise<Book | null> => {
       return null;
     }
 
-    var b = docSnap.data() as Book;
+    let b = docSnap.data() as Book;
     b.Metadata = { ID: docSnap.id };
 
     return b;
@@ -48,7 +48,7 @@ export const getBooks = async (): Promise<Book[]> => {
     );
     let books: Book[] = [];
     querySnapshot.forEach((doc) => {
-      var b = doc.data() as Book;
+      let b = doc.data() as Book;
       b.Metadata = { ID: doc.id };
 
       books.push(b);
