@@ -46,14 +46,10 @@ export const getBooks = async (): Promise<Book[]> => {
     const querySnapshot = await getDocs(
       query(collection(db, collectionName), orderBy("Rating", "desc")),
     );
-    let books: Book[] = [];
-    querySnapshot.forEach((doc) => {
-      let b = doc.data() as Book;
-      b.Metadata = { ID: doc.id };
-
-      books.push(b);
-    });
-    return books;
+    return querySnapshot.docs.map(doc => ({
+      ...doc.data(),
+      Metadata: { ID: doc.id }
+    }) as Book);
   } catch (e) {
     console.error("Error getting documents: ", e);
     return [];
