@@ -25,7 +25,13 @@ const EditBook = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    let isMounted = true;
+
     getBook(id ?? "").then((book: Book | null) => {
+      if (!isMounted) {
+        return;
+      }
+
       // Update the type of the parameter to accept Book | null
       setTitle(book?.Title ?? "");
       setAuthor(book?.AuthorID ?? "");
@@ -33,6 +39,10 @@ const EditBook = () => {
       setDescription(book?.Description ?? "");
       setRating(book?.Rating ?? 0);
       setCoverURL(book?.CoverURL ?? "");
+
+      return () => {
+        isMounted = false;
+      };
     });
   }, []);
 

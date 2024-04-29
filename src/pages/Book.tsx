@@ -11,9 +11,16 @@ const BookDetails = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
+    let isMounted = true;
     getBook(id ?? "").then((book) => {
-      setBook(book);
+      if (isMounted) {
+        setBook(book);
+      }
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleClick = () => {

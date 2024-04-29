@@ -17,7 +17,13 @@ const Browse = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     getBooks().then((books) => {
+      if (!isMounted) {
+        return;
+      }
+
       const search = searchParams.get("search");
 
       if (search) {
@@ -25,6 +31,10 @@ const Browse = () => {
       }
 
       setBook(books);
+
+      return () => {
+        isMounted = false;
+      };
     });
   }, []);
 
