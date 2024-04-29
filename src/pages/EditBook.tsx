@@ -49,7 +49,7 @@ const EditBook = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (cover != null) {
+    if (cover !== null) {
       uploadCover(title, cover!);
     }
 
